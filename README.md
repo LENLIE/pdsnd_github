@@ -1,35 +1,41 @@
+# UDACITY - Python Bikeshare Project
+
 ### Date:
 
-# Project has been created on 28/04/2019
+Project has been created on 28/04/2019
 
 ### Bikeshare Python Project:
 
-# This project is part of Udacity's Programming for Data Science Nanodegree.
+This project is part of Udacity's Programming for Data Science Nanodegree.
 
 ### Description:
 
-# Description will be added.
+Description will be added.
 
 ### Files:
 
-# chicago.csv, washington.csv, new-york-city.csv
+<ul>
+<li>chicago.csv</li>
+<li>new-york-city.csv</li>
+<li>washington.csv</li>
+</ul>
 
 ### Credits:
 
-# Copied seconds to days converter from following source:
+Copied seconds to days converter from following source: <br />
 https://stackoverflow.com/questions/4048651/python-function-to-convert-seconds-into-minutes-hours-and-days
 
-# Counting unique values with bands:
+Counting unique values with bands: <br />
 https://stackoverflow.com/questions/38309729/count-unique-values-with-pandas-per-groups/38309823
 
-# Get position in a list:
+Get position in a list: <br />
 https://stackoverflow.com/questions/4081672/position-in-an-list
 
-# Select rows for a specific month in Pandas:
+Select rows for a specific month in Pandas: <br />
 https://stackoverflow.com/questions/50265938/select-rows-for-a-specific-month-in-pandas
 
-# Obtain mode from column in groupby [duplicate] >> Removed from code
+Obtain mode from column in groupby [duplicate] >> Removed from code: <br />
 https://stackoverflow.com/questions/48645354/obtain-mode-from-column-in-groupby
 
-# Pandas: Sort by most frequent value combinations
+Pandas - Sort by most frequent value combinations: <br />
 https://www.reddit.com/r/learnpython/comments/7s99rk/pandas_sort_by_most_frequent_value_combinations/
