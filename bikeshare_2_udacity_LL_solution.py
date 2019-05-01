@@ -266,11 +266,15 @@ def user_stats(df):
     print("\nCalculation Time: %s seconds" % (time.time() - start_time))
 
 def raw_data(df):
-    while True:
+    """
+    Displays raw data statistics based on user input
+    """
 
+    start = 0
+    end = 5
+    while True:
         raw_data = input("\nAre you interested to see some raw data? Enter 'yes' or 'no'.\n")
         if raw_data.lower() == "yes":
-
             print("\n")
             print('-'*100)
             print('Fetching Raw Data Statistics:')
@@ -278,9 +282,11 @@ def raw_data(df):
             start_time = time.time()
 
             print("\n")
-            print(df[df.columns[0:-1]].iloc[0:5])
+            print(df[df.columns[0:-1]].iloc[start:end])
             print("\nCalculation Time: %s seconds" % (time.time() - start_time))
-
+            start += 5
+            end += 5
+            
         else:
             break
 
