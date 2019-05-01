@@ -29,7 +29,7 @@ def get_filters():
     print('Let us explore some US bikeshare data!')
     print('*'*80)
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    
+
     while True:
         try:
             city = str(input("\nWould you like to see data for 'Chicago', 'New York' or 'Washington'?\n").lower())
@@ -37,7 +37,7 @@ def get_filters():
                 #df = pd.read_csv(CITY_DATA[city.lower()])
                 break
             else:
-                print(f"\nUnfortunately, there is not valid data for {city.title()}!") 
+                print(f"\nUnfortunately, there is not valid data for {city.title()}!")
                 print("Please choose 'Chicago', 'New York' or 'Washington!")
         except ValueError:
             print("That is not a valid city.")
@@ -66,7 +66,8 @@ def get_filters():
                 print("Please choose 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'!")
         except ValueError:
             print("That is not a valid day.")
-    
+
+    print("\n")
     print('-'*100)
     print("Calculating 'Bikeshare' statistics for the following parameters:")
     print(f'City: {city.capitalize()} // Month: {month.capitalize()} // Day: {day.capitalize()}')
@@ -94,21 +95,21 @@ def load_data(city, month, day):
 
     # extract month from Start Time to create new column
     df['month'] = df['Start Time'].dt.month
-    
+
     # extract weekday from Start Time to create new column
     df['day_of_week'] = df['Start Time'].dt.weekday_name
-    
+
     # extract hour from Start Time to create new column
     df['hour'] = df['Start Time'].dt.hour
-    
+
     #print(df['day_of_week'])
 
 
     # filter by month if applicable
     if month != 'all':
-        # use the index of the months list to get the corresponding int        
+        # use the index of the months list to get the corresponding int
         month = MONTH_LIST.index(month.lower())+1
-    
+
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -134,7 +135,7 @@ def time_stats(df):
     common_month = df["month"].mode()[0]
     common_month = MONTH_LIST[common_month-1]
     print(f"\nMost common month: '{common_month.capitalize()}'\n")
-    
+
     # display the most common day of week
     common_day = df['day_of_week'].mode()[0]
     print(f"Most common day: '{common_day.capitalize()}'\n")
@@ -159,22 +160,22 @@ def station_stats(df):
     count_start_station = df["Start Station"].value_counts().max()
     print(f"\nStart Station: {common_start_station}")
     print(f"Total Count: {count_start_station}\n")
-    
+
 
     # display most commonly used end station
     common_end_station = df["End Station"].mode()[0]
     count_end_station = df["End Station"].value_counts().max()
     print(f"End Station: {common_end_station}")
     print(f"Total Count: {count_end_station}\n")
-    
-    
+
+
     # display most frequent combination of start station and end station trip
     df["start_end_combo"] = df["Start Station"] + " // " + df["End Station"]
     freq_combo = df["start_end_combo"].mode()[0]
     count_freq_combo = df["start_end_combo"].value_counts().max()
-    
+
     #freq_meth = df.groupby(['Start Station','End Station']).size().sort_values(ascending=False)
-    
+
     print(f"Start Station // End Station: {freq_combo}")
     print(f"Total Count: {count_freq_combo}")
 
@@ -185,7 +186,7 @@ def station_stats(df):
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
-    
+
     print('-'*100)
     print('Calculating Trip Duration:')
     print('-'*100)
@@ -194,28 +195,28 @@ def trip_duration_stats(df):
     # display total travel time
     total_travel_time = df["Trip Duration"].sum()
     print(f"\nTotal Travel Time (Seconds): {total_travel_time}")
-    
+
     # Copied from following source:
     # Source: https://stackoverflow.com/questions/4048651/python-function-to-convert-seconds-into-minutes-hours-and-days
     # total travel time conversion into days, hours, minutes, seconds
     tt = total_travel_time
-    tt_days = divmod(tt, 86400) 
+    tt_days = divmod(tt, 86400)
     # days[0] = whole days and
     # days[1] = seconds remaining after those days
     tt_hours = divmod(tt_days[1], 3600)
     tt_minutes = divmod(tt_hours[1], 60)
     print(f"Total travel time (dd/hh/mm/ss): {tt_days[0]} Days, {tt_hours[0]} Hours, {tt_minutes[0]} Minutes, {tt_minutes[1]} Seconds")
-    
+
 
     # display mean travel time
     avg_travel_time = df["Trip Duration"].mean()
-    print(f"\nAverage Travel Time (Seconds): {avg_travel_time}")   
-    
+    print(f"\nAverage Travel Time (Seconds): {avg_travel_time}")
+
     # Copied from following source:
     # Source: https://stackoverflow.com/questions/4048651/python-function-to-convert-seconds-into-minutes-hours-and-days
     # average travel time conversion into days, hours, minutes, seconds
     at = avg_travel_time
-    at_days = divmod(at, 86400) 
+    at_days = divmod(at, 86400)
     # days[0] = whole days and
     # days[1] = seconds remaining after those days
     at_hours = divmod(at_days[1], 3600)
@@ -240,14 +241,14 @@ def user_stats(df):
     print(f"\nBreakdown of Users: \n{user_types}")
 
     # Display counts of gender
-    
+
     if "Gender" in df:
         gender = df["Gender"].value_counts()
         print(f"\nBreakdown of gender: \n{gender}")
     else:
         print("\nBreakdown of Gender:")
         print("No gender data to share.")
-        
+
 
     # Display earliest, most recent, and most common year of birth
     if "Birth Year" in df:
@@ -263,8 +264,31 @@ def user_stats(df):
         print("No birth data to share.")
 
     print("\nCalculation Time: %s seconds" % (time.time() - start_time))
-    print("\n")
 
+def raw_data(df):
+    """
+    Displays raw data statistics based on user input
+    """
+
+    start = 0
+    end = 5
+    while True:
+        raw_data = input("\nAre you interested to see some raw data? Enter 'yes' or 'no'.\n")
+        if raw_data.lower() == "yes":
+            print("\n")
+            print('-'*100)
+            print('Fetching Raw Data Statistics:')
+            print('-'*100)
+            start_time = time.time()
+
+            print("\n")
+            print(df[df.columns[0:-1]].iloc[start:end])
+            print("\nCalculation Time: %s seconds" % (time.time() - start_time))
+            start += 5
+            end += 5
+            
+        else:
+            break
 
 def main():
     while True:
@@ -275,8 +299,8 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        raw_data(df)
+        restart = input('\nWould you like to restart? Enter "yes" or "no".\n')
         if restart.lower() != 'yes':
             break
 
