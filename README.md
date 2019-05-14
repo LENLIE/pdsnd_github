@@ -4,6 +4,11 @@
 
 Project has been created on 28/04/2019
 
+### Pre-Requsistes
+
+Python - v.3.x.x onwards
+No non-core modules required
+
 ### Bikeshare Python Project:
 
 This project is part of Udacity's Programming for Data Science Nanodegree.
